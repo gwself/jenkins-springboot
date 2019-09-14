@@ -17,10 +17,9 @@ sourFile=${WORKSPACE}/target/${projectName}*.jar
 destFile=${destAbsPath}/${projectName}.jar
 properties=--spring.profiles.active=${env}
 
-#CONSTANTS
+#定义常量
 logFile=${projectName}.log
 dstLogFile=${destAbsPath}/${logFile}
-#whatToFind="Started Application in"
 whatToFind="Started "
 msgLogFileCreated="$logFile created"
 msgBuffer="Buffering: "
