@@ -1,0 +1,14 @@
+---
+- hosts: "webservers"
+  remote_user: developer
+  tasks:
+    - name: test connection
+      ping:
+    - name: copy file to remote server
+      copy: src=/home/bigdata/jenkins-spring-boot/dev/jenkins-spring-boot.jar dest=/home/developer/java-projects owner=developer mode=0644
+    - name: stop server
+      shell: PATH="/usr/local/java/bin:/usr/local/maven/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/developer/.local/bin:/home/developer/bin"
+        fuser -n tcp -k 8080 > redirection &
+    - name: start server
+      shell: PATH="/usr/local/java/bin:/usr/local/maven/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/developer/.local/bin:/home/developer/bin"
+        nohup nice java -jar /home/developer/java-projects/jenkins-spring-boot.jar $> java-projects/jenkins-spring-boot.log 2>&1 &
