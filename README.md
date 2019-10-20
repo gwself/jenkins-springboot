@@ -6,19 +6,18 @@ spring-boot 项目 jenkins+ansible 自动化部署
 
 #!/bin/bash
 
-# 环境参数
+#环境参数
 env=$1
-# 端口号
+#端口号
 serverPort=$2
-# 项目名称
+#项目名称
 projectName=$3 
 
 
-#### 配置变量 ######
-# 复制项目包的目标路径
+#复制项目包的目标路径
 destAbsPath=/home/bigdata/${projectName}/${env}
 
-# $WORKSPACE 是jenkins 的一个变量
+#$WORKSPACE 是jenkins 的一个变量
 sourFile=${WORKSPACE}/target/${projectName}*.jar
 destFile=${destAbsPath}/${projectName}.jar
 properties=--spring.profiles.active=${env}
@@ -31,8 +30,6 @@ msgLogFileCreated="$logFile created"
 msgBuffer="Buffering: "
 msgAppStarted="Application Started... exiting buffer!"
 
-### FUNCTIONS
-##############
 function stopServer(){
     echo " "
     echo "Stoping process on port: $serverPort"
@@ -91,22 +88,21 @@ function watch(){
         done
 }
 
-### 函数调用
 
-# BUILD_ID=dontKillMe /path/to/this/file/api-deploy.sh dev 8080 jenkins-spring-boot
+#BUILD_ID=dontKillMe /path/to/this/file/api-deploy.sh dev 8080 jenkins-spring-boot
 
-# 1 - 停止服务
+#1 - 停止服务
 stopServer
 
-# 2 - 删除文件夹
+#2 - 删除文件夹
 deleteFiles
 
-# 3 - 复制文件
+#3 - 复制文件
 copyFiles
 
 changeFilePermission
-# 4 - 改变权限
+#4 - 改变权限
 run
 
-# 5 - 加载完成
+#5 - 加载完成
 watch
