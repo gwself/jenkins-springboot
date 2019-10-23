@@ -107,3 +107,8 @@ spring-boot 项目 jenkins+ansible 自动化部署
 
             #5 - 加载完成
             watch
+            
+            
+## 参考资料
+
+1.0 https://github.com/rcoli/spring-boot-jenkins
